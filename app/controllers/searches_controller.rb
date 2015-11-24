@@ -19,13 +19,19 @@ class SearchesController < ActionController::Base
     @offices = Office.where(office_params)
 
     @doctors = []
-    @offices.each { |office| office.doctors.each { |doctor| @doctors << doctor } }
-    @doctors = @doctors.keep_if { |doctor| doctor.fields.find_by(subject: field_params) } unless field_params.blank?
+
+    all_doctors = @offices.map { |office| office.doctors }.flatten
+    all_doctors.each do |doctor|
+      if field_params.blank?
+        @doctors << doctor
+      else
+        @doctors << doctor if doctor.fields.find_by(subject: field_params)
+      end
+    end
 
 
-    # all_doctors = @offices.each { |office| office.doctors.each { |doctor| @doctors << doctor } }
-
-
+    # @offices.each { |office| office.doctors.each { |doctor| @doctors << doctor } }
+    # @doctors = @doctors.keep_if { |doctor| doctor.fields.find_by(subject: field_params) } unless field_params.blank?
     # @doctors = Doctor.includes(:offices).where("offices.state" => "MN")
   end
 
