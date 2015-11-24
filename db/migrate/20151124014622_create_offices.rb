@@ -4,8 +4,8 @@ class CreateOffices < ActiveRecord::Migration
       t.string :address
       t.string :city
       t.string :state
-      t.integer :zip
-      t.integer :phone
+      t.string :zip
+      t.string :phone
 
       t.timestamps null: false
     end
