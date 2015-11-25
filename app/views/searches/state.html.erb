@@ -1,4 +1,4 @@
-<h2>Current State: <%= @state %></h2>
+<h2>Current State: <%= @states[@state.to_sym] %></h2>
 
 <%= form_tag "/#{@state}/results" do %>
   <%= select_tag("search[type]", options_for_select(["Doctors", "Healthcare Centers"])) %>

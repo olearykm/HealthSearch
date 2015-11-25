@@ -13,6 +13,13 @@ class SearchesController < ActionController::Base
     @state = params[:state]
     @offices = Office.where(state: @state)
     @fields = Field.all
+    
+    @states = {
+      CA: "California",
+      GA: "Georgia",
+      IL: "Illinois",
+      MN: "Minnesota"
+    }
   end
 
   def search
