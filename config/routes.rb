@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+
+  root "searches#index"
+  get "/:state" => "searches#state"
+  post "/:state/doctors" => "searches#search"
+
+  # resources :users
+  # resources :apartments do
+  #   resources :requests do
+  #   end
+  # end
+
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
