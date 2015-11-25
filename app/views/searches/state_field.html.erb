@@ -1,17 +1,3 @@
-<% @doctors.each do |doctor| %>
-  <h4>Dr. <%= doctor.first_name %> <%= doctor.last_name %></h4>
-  <% doctor.fields.each do |field| %>
-    <h4><%= field.subject %></h4>
-  <% end %>
-  <br>
-<% end %>
-
-<% @current_offices.each do |office| %>
-  <h4><%= office.address %></h4>
-  <h4><%= office.city %>, <%= office.state %></h4>
-  <br>
-<% end %>
-
 <table>
   <tr>
     <th>Name</th>

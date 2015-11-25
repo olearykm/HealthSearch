@@ -18,12 +18,28 @@ class SearchesController < ActionController::Base
   def search
     @doctors = []
     @offices = Office.where(office_params)
+    @current_offices = []
 
-    if search_by_city_state_field? || search_by_state_field?
+    if search_by_city_state_field?
       potential_doctors = @offices.map { |office| office.doctors }.flatten
       potential_doctors.each do |doctor|
-        @doctors << doctor if doctor.fields.find_by(subject: field_params)
+        if doctor.fields.find_by(subject: field_params) && !@doctors.include?(doctor)
+          @doctors << doctor
+          @current_offices << doctor.offices.find_by(office_params)
+        end
       end
+      render :state_field
+
+    elsif search_by_state_field?
+      potential_doctors = @offices.map { |office| office.doctors }.flatten
+      potential_doctors.each do |doctor|
+        if doctor.fields.find_by(subject: field_params) && !@doctors.include?(doctor)
+          @doctors << doctor
+          @current_offices << doctor.offices.find_by(office_params)
+        end
+      end
+      render :state_field
+
     elsif search_by_state_only? || search_by_city_state?
       @doctors = @offices.map { |office| office.doctors }.flatten
     end
