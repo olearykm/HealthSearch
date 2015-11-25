@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Field</th>
+  </tr>
+  <% for office in @offices %>
+  <tr>
+    <td><%= office.address %></td>
+    <td><%= office.city %></td>
+    <td><%= @state %></td>
+    <td><%= @field %></td>
+  </tr>
+  <% end %>
+</table>

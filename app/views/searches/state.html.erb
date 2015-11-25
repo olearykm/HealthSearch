@@ -1,8 +1,9 @@
-<h2>Current State: <%= @current_state %></h2>
+<h2>Current State: <%= @state %></h2>
 
-<%= form_tag "/#{@current_state}/doctors" do %>
+<%= form_tag "/#{@state}/results" do %>
+  <%= select_tag("search[type]", options_for_select(["Doctors", "Healthcare Centers"])) %>
   <%= select_tag("office[city]", options_for_select([["City", ""]] + @offices.all.pluck(:city))) %>
-  <%= select_tag("office[state]", options_for_select([@current_state])) %>
+  <%= select_tag("office[state]", options_for_select([@state])) %>
   <%= select_tag("field[subject]", options_for_select([["Field", ""]] + @fields.all.pluck(:subject))) %>
 
   <%= submit_tag("Search") %>

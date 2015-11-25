@@ -1,6 +1,6 @@
 class SearchesController < ActionController::Base
 
-  def index
+  def home
     @states = {
       CA: "California",
       GA: "Georgia",
@@ -10,38 +10,50 @@ class SearchesController < ActionController::Base
   end
 
   def state
-    @current_state = params[:state]
-    @offices = Office.where(state: @current_state)
+    @state = params[:state]
+    @offices = Office.where(state: @state)
     @fields = Field.all
   end
 
   def search
-    @doctors = []
-    @offices = Office.where(office_params)
-    @current_offices = []
+    @city = office_params[:city]
+    @state = office_params[:state]
+    @field = field_params
 
-    if search_by_city_state_field?
-      potential_doctors = @offices.map { |office| office.doctors }.flatten
-      potential_doctors.each do |doctor|
-        if doctor.fields.find_by(subject: field_params) && !@doctors.include?(doctor)
-          @doctors << doctor
-          @current_offices << doctor.offices.find_by(office_params)
-        end
+    if search_for_doctors?
+
+      case
+      when search_by_state?
+        @doctors = Doctor.find_doctors_by_state(@state)
+        render :doctors_by_state
+      when search_by_city_state?
+        @doctors = Doctor.find_doctors_by_city_state(@city, @state)
+        render :doctors_by_city_state
+      when search_by_state_field?
+        @doctors = Doctor.find_doctors_by_state_field(@state, @field)
+        render :doctors_by_state_field
+      when search_by_city_state_field?
+        @doctors = Doctor.find_doctors_by_city_state_field(@city, @state, @field)
+        render :doctors_by_city_state_field
       end
-      render :state_field
 
-    elsif search_by_state_field?
-      potential_doctors = @offices.map { |office| office.doctors }.flatten
-      potential_doctors.each do |doctor|
-        if doctor.fields.find_by(subject: field_params) && !@doctors.include?(doctor)
-          @doctors << doctor
-          @current_offices << doctor.offices.find_by(office_params)
-        end
+    elsif search_for_centers?
+
+      case
+      when search_by_state?
+        @offices = Office.find_offices_by_state(@state)
+        render :centers_by_state
+      when search_by_city_state?
+        @offices = Office.find_offices_by_city_state(@city, @state)
+        render :centers_by_city_state
+      when search_by_state_field?
+        @offices = Office.find_offices_by_state_field(@state, @field)
+        render :centers_by_state_field
+      when search_by_city_state_field?
+        @offices = Office.find_offices_by_city_state_field(@city, @state, @field)
+        render :centers_by_city_state_field
       end
-      render :state_field
 
-    elsif search_by_state_only? || search_by_city_state?
-      @doctors = @offices.map { |office| office.doctors }.flatten
     end
   end
 
@@ -58,6 +70,14 @@ class SearchesController < ActionController::Base
     params[:field][:subject] unless params[:field][:subject].blank?
   end
 
+  def search_for_doctors?
+    params[:search][:type] == "Doctors"
+  end
+
+  def search_for_centers?
+    params[:search][:type] == "Healthcare Centers"
+  end
+
   def search_by_city_state?
     office_params[:city] && !field_params
   end
@@ -66,7 +86,7 @@ class SearchesController < ActionController::Base
     !office_params[:city] && field_params
   end
 
-  def search_by_state_only?
+  def search_by_state?
     !office_params[:city] && !field_params
   end
 
