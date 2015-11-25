@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+  </tr>
+  <% for office in @offices %>
+  <tr>
+    <td><%= office.address %></td>
+    <td><%= @city %></td>
+    <td><%= @state %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Field</th>
+  </tr>
+  <% for doctor in @doctors %>
+  <tr>
+    <td><%= doctor.full_name %></td>
+    <td><%= @city %></td>
+    <td><%= @state %></td>
+    <td><%= @field %></td>
+  </tr>
+  <% end %>
+</table>
