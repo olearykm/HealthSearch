@@ -1,5 +1,5 @@
 <% @doctors.each do |doctor| %>
-  <h4><%= doctor.last_name %></h4>
+  <h4>Dr. <%= doctor.first_name %> <%= doctor.last_name %></h4>
   <% doctor.fields.each do |field| %>
     <h4><%= field.subject %></h4>
   <% end %>

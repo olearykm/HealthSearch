@@ -16,23 +16,17 @@ class SearchesController < ActionController::Base
   end
 
   def search
+    @doctors = []
     @offices = Office.where(office_params)
 
-    @doctors = []
-
-    all_doctors = @offices.map { |office| office.doctors }.flatten
-    all_doctors.each do |doctor|
-      if field_params.blank?
-        @doctors << doctor
-      else
+    if search_by_city_state_field? || search_by_state_field?
+      potential_doctors = @offices.map { |office| office.doctors }.flatten
+      potential_doctors.each do |doctor|
         @doctors << doctor if doctor.fields.find_by(subject: field_params)
       end
+    elsif search_by_state_only? || search_by_city_state?
+      @doctors = @offices.map { |office| office.doctors }.flatten
     end
-
-
-    # @offices.each { |office| office.doctors.each { |doctor| @doctors << doctor } }
-    # @doctors = @doctors.keep_if { |doctor| doctor.fields.find_by(subject: field_params) } unless field_params.blank?
-    # @doctors = Doctor.includes(:offices).where("offices.state" => "MN")
   end
 
   private
@@ -45,10 +39,23 @@ class SearchesController < ActionController::Base
   end
 
   def field_params
-    params[:field][:subject]
+    params[:field][:subject] unless params[:field][:subject].blank?
   end
 
-  def doctor_params
+  def search_by_city_state?
+    office_params[:city] && !field_params
+  end
+
+  def search_by_state_field?
+    !office_params[:city] && field_params
+  end
+
+  def search_by_state_only?
+    !office_params[:city] && !field_params
+  end
+
+  def search_by_city_state_field?
+    office_params[:city] && field_params
   end
 
 end
