@@ -3,12 +3,18 @@
     <th>Address</th>
     <th>City</th>
     <th>State</th>
+    <th>Zip</th>
+    <th>Distance</th>
   </tr>
-  <% for office in @offices %>
+  <%# for office in @offices %>
+  <% offices = Office.near(@zipcode, 2) %>
+  <% offices.each do |office| %>
   <tr>
     <td><%= office.address %></td>
     <td><%= office.city %></td>
     <td><%= @state %></td>
+    <td><%= office.zip %></td>
+    <td><%= office.distance %></td>
   </tr>
   <% end %>
 </table>

@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Specialties</th>
+    <th>Street</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Distance</th>
+  </tr>
+  <% @offices.each do |office| %>
+    <% office.doctors.each do |doctor| %>
+      <% if doctor.is_a?(@field) %>
+        <tr>
+          <td><%= doctor.full_name %></td>
+          <td><%= doctor.expertise %></td>
+
+          <td><%= office.address %></td>
+          <td><%= office.city %></td>
+          <td><%= @state %></td>
+          <td><%= office.zip %></td>
+          <td><%= '%.2f' % office.distance %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>

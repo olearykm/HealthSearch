@@ -12,6 +12,22 @@ class Doctor < ActiveRecord::Base
     office = self.offices.find_by(city: current_city)
   end
 
+  def is_a?(specialty)
+    boolean = false
+    self.fields.each { |field| boolean = true if field.subject == specialty }
+    return boolean
+  end
+
+  # def self.find_doctors_near_zipcode(current_state, centers)
+  #   doctors = []
+  #
+  #   state_doctors = Doctor.joins(:offices).where("offices.state = ?", current_state).distinct
+  #
+  #   state_doctors.map { |doctor| doctors << doctor unless (doctor.offices & centers).empty? }
+  #
+  #   doctors
+  # end
+
   def self.find_doctors_by_state(current_state)
     Doctor.joins(:offices).where("offices.state = ?", current_state).distinct
   end

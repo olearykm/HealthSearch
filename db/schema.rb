@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20151124024937) do
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

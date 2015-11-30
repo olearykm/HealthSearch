@@ -3,6 +3,25 @@ class Office < ActiveRecord::Base
   has_many :doctors, through: :assignments
   has_many :fields, through: :doctors
 
+  geocoded_by :full_address
+  after_validation :geocode
+
+  def full_address
+    "#{self.address} #{self.city}, #{self.state} #{self.zip}"
+  end
+
+  def self.find_doctors(zipcode, field)
+    # offices = Office.where(state: current_state)
+    # doctors = []
+    all_offices = Office.near(zipcode, 3)
+
+    # all_offices.each do |office|
+    #   office.doctors.each do |doctor|
+    #     doctors << doctor if doctor.fields.include?(field)
+    #   end
+    # end
+  end
+
   def is_office_in_state?(current_state)
     self.state == current_state
   end
