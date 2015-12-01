@@ -1,0 +1,27 @@
+<div class="results-container">
+  <% @offices.each do |office| %>
+    <% if office.has_a?(@field) || @field.blank? %>
+      <div class="doctor-container">
+        <div class="doctor-info">
+          <h4>Healthcare Center</h4>
+          <h4 class="soft-text"><%= @field %></h4>
+        </div>
+
+        <div class="office-info">
+          <h4 class="soft-text"><%= office.address %></h4>
+          <h4 class="soft-text"><%= office.city %>, <%= @state %> <%= office.zip %></h4>
+          <h4 class="soft-text"><%= office.phone_number %></h4>
+        </div>
+
+        <div class="distance-info">
+          <h1 class="soft-text"><%= office.rounded_distance %></h4>
+          <h4 class="soft-text">Miles</h4>
+        </div>
+
+        <div class="profile-info">
+          <%= link_to "View Profile", "/#{@state}/offices/#{office.id}", class: "profile-link" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

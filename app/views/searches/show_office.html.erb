@@ -1,0 +1,21 @@
+<div class="show-container">
+  <div class="show-top-info">
+    <h1>Healthcare Center</h1>
+  </div>
+
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=15&markers=#{@office.latitude}%2C#{@office.longitude}" %>
+
+  <div class="show-office-info">
+    <h2><%= @office.full_address %></h2>
+    <h4 class="soft-text"><span>Phone</span> <%= @office.phone_number %></h4>
+  </div>
+
+  <div class="show-office-doctors">
+    <% @office.doctors.each do |doctor| %>
+      <div class="office-doctor-info">
+        <h4><%= doctor.full_name %></h4>
+        <h4 class="soft-text"><%= doctor.expertise %></h4>
+      </div>
+    <% end %>
+  </div>
+</div>

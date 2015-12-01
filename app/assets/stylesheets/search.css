@@ -67,6 +67,7 @@ input[type="submit"] {
   background-color: #DE725A;
   border: none;
   font-size: 15px;
+  cursor: pointer;
   webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
