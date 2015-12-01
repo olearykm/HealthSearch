@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
     @zipcode = params[:zipcode]
 
     @offices = Office.find_offices(@zipcode, @field, @mileage)
-    render :search_doctors
+    # render :search_doctors
 
     # @city = office_params[:city]
     # @state = office_params[:state]
@@ -66,6 +66,11 @@ class SearchesController < ApplicationController
     #   end
     #
     # end
+  end
+
+  def show
+    @office = Office.find(params[:office_id])
+    @doctor = Doctor.find(params[:id])
   end
 
   private

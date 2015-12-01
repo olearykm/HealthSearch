@@ -1,0 +1,13 @@
+<div class="show-container">
+  <div class="show-doctor-info">
+    <h1><%= @doctor.full_name %></h1>
+    <h4 class="soft-text"><%= @doctor.expertise %></h4>
+  </div>
+
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=15&markers=#{@office.latitude}%2C#{@office.longitude}" %>
+
+  <div class="show-office-info">
+    <h2><%= @office.full_address %></h2>
+    <h4 class="soft-text"><span>Phone</span> <%= @office.phone_number %></h4>
+  </div>
+</div>

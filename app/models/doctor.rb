@@ -8,10 +8,6 @@ class Doctor < ActiveRecord::Base
     "Dr. #{self.first_name} #{self.last_name}"
   end
 
-  def location(current_city)
-    office = self.offices.find_by(city: current_city)
-  end
-
   def expertise
     self.fields.map { |field| field.subject }.sort.join(", ")
   end
@@ -22,6 +18,10 @@ class Doctor < ActiveRecord::Base
     return boolean
   end
 
+  # def location(current_city)
+  #   office = self.offices.find_by(city: current_city)
+  # end
+  #
   # def self.find_doctors_by_state(current_state)
   #   Doctor.joins(:offices).where("offices.state = ?", current_state).distinct
   # end
