@@ -50,11 +50,9 @@
   padding: 15px 25px 15px 25px;
   color: grey;
   text-decoration: none;
-  /*font-weight: lighter;*/
 }
 
 .profile-link:hover {
   border: 1px solid grey;
   color: black;
-  /*font-weight: lighter;*/
 }
