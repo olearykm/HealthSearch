@@ -1,0 +1,73 @@
+.search-form-container {
+  margin: auto;
+  width: 825px;
+  text-align: center;
+}
+
+.header-container {
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+.header-container h1 {
+  font-weight: bold;
+}
+
+.header-container h4 {
+  margin: 20px 0 0 0;
+}
+
+.header-container span {
+  font-weight: normal;
+}
+
+.form-doctor-container select, input[list] {
+  height: 36px;
+  width: 200px;
+  margin: 0;
+  border: 1px solid #E6E6E6;
+  font-size: 15px;
+  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-location-container select, input[list] {
+  height: 36px;
+  width: 100px;
+  margin: 10px;
+  border: none;
+  border-bottom: 1px solid #E6E6E6;
+  background-color: white;
+  font-size: 15px;
+  padding: 0.5em;
+  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-location-container input[type=text] {
+  height: 36px;
+  width: 75px;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #E6E6E6;
+  font-size: 15px;
+  padding: 5px;
+  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  height: 36px;
+  width: 200px;
+  margin: 10px;
+  color: white;
+  background-color: #DE725A;
+  border: none;
+  font-size: 15px;
+  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

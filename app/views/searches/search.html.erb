@@ -1,15 +1,21 @@
-<h2>Current State: <%= @states[@state.to_sym] %></h2>
+<div class="search-form-container">
+  <div class="header-container">
+    <h1>A WHOLE TEAM</h1>
+    <h1>BEHIND YOU</h1>
+    <h4 class="soft-text">Search Harken's <span><%= @states[@state.to_sym] %></span> doctors and hospitals</h4>
+  </div>
 
-<%= form_tag "/#{@state}/results", method: :get do %>
-  <%# select_tag("search[type]", options_for_select(["Doctors", "Healthcare Centers"])) %>
-  <%# select_tag("office[city]", options_for_select([["City", ""]] + @offices.all.pluck(:city))) %>
-  <%# select_tag("office[state]", options_for_select([@state])) %>
-  <%# select_tag("field[subject]", options_for_select([["Field", ""]] + @fields.all.pluck(:subject))) %>
+  <%= form_tag "/#{@state}/results", method: :get, class: "form-container" do %>
+    <div class="form-doctor-container">
+      <%= select_tag("type", options_for_select(["Doctors", "Healthcare Centers"])) %>
+      <%= select_tag("field", options_for_select([["Field", ""]] + @fields.all.pluck(:subject))) %>
+    </div>
 
-  <%= select_tag("type", options_for_select(["Doctors", "Healthcare Centers"])) %>
-  <%= select_tag("field", options_for_select([["Field", ""]] + @fields.all.pluck(:subject))) %>
-  <%= select_tag("mileage", options_for_select([["1 mile", 1], ["2 miles", 2], ["5 miles", 5], ["10 miles", 10], ["20+ miles", 25]])) %>
-  <%= text_field_tag("zipcode", nil, placeholder: "zip code", required: true) %>
+    <div class="form-location-container">
+      <h4 class="soft-text">within <%= select_tag("mileage", options_for_select([["1 mile", 1], ["2 miles", 2], ["5 miles", 5], ["10 miles", 10], ["20+ miles", 25]])) %>  of  <%= text_field_tag("zipcode", nil, placeholder: "zip code", required: true) %></h4>
+    </div>
 
-  <%= submit_tag("Search") %>
-<% end %>
+    <%= submit_tag("Search") %>
+
+  <% end %>
+</div>

@@ -1,3 +1,10 @@
-<% @states.each do |abb, name| %>
-  <%= link_to name, "/#{abb}", class: "state-link" %>
-<% end %>
+<div class="home-container">
+  <div class="header-container">
+    <h1>HEALTH CARE REIMAGINED</h1>
+    <h4 class="soft-text">What state do you live in?</h4>
+  </div>
+
+  <% @states.each do |abb, name| %>
+    <%= link_to name, "/#{abb}", class: "state-link" %>
+  <% end %>
+</div>
