@@ -1,0 +1,16 @@
+.show-container {
+  margin: auto;
+  width: 640px;
+}
+
+.show-doctor-info {
+  margin-bottom: 20px;
+}
+
+.show-office-info {
+  margin-top: 20px;
+}
+
+.show-office-info span {
+  font-weight: normal;
+}
