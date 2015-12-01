@@ -1,6 +1,6 @@
 <h2>Current State: <%= @states[@state.to_sym] %></h2>
 
-<%= form_tag "/#{@state}/results", method: :get do %>
+<%= form_tag "/#{@state}/results", method: :get, class: "form-container" do %>
   <%# select_tag("search[type]", options_for_select(["Doctors", "Healthcare Centers"])) %>
   <%# select_tag("office[city]", options_for_select([["City", ""]] + @offices.all.pluck(:city))) %>
   <%# select_tag("office[state]", options_for_select([@state])) %>

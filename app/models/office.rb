@@ -21,8 +21,16 @@ class Office < ActiveRecord::Base
     "#{self.address} #{self.city}, #{self.state} #{self.zip}"
   end
 
+  def phone_number
+    "(#{self.phone[0..2]}) #{self.phone[3..5]}-#{self.phone[6..9]}"
+  end
+
   def self.find_offices(zipcode, field, mileage)
     all_offices = Office.near(zipcode, mileage)
+  end
+
+  def rounded_distance
+    '%.1f' % self.distance
   end
 
   # def is_office_in_state?(current_state)

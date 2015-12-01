@@ -1,0 +1,23 @@
+select, input[list] {
+  height: 36px;
+  width: 400px;
+  margin: 0.5em 0 0.75em 0;
+  border: 1px solid #E6E6E6;
+  font-size: 15px;
+  padding: 0.5em;
+  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-container input[type=text], .form-container input[type=email] {
+  height: 36px;
+  width: 400px;
+  margin: 0.5em 0 0.75em 0;
+  border: 1px solid #E6E6E6;
+  font-size: 15px;
+  padding: 0.5em;
+  webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
