@@ -12,23 +12,30 @@ class Doctor < ActiveRecord::Base
     office = self.offices.find_by(city: current_city)
   end
 
-  def self.find_doctors_by_state(current_state)
-    Doctor.joins(:offices).where("offices.state = ?", current_state).distinct
-  end
-
-  def self.find_doctors_by_city_state(current_city, current_state)
-    Doctor.joins(:offices).where("offices.city = ? and offices.state = ?", current_city, current_state)
-  end
-
-  def self.find_doctors_by_state_field(current_state, current_field)
-    Doctor.joins(offices: :fields).where(offices: { state: current_state }, fields: { subject: current_field }).distinct
-  end
-
-  def self.find_doctors_by_city_state_field(current_city, current_state, current_field)
-    Doctor.joins(offices: :fields).where(offices: { city: current_city, state: current_state }, fields: { subject: current_field }).distinct
-  end
-
   def expertise
-    self.fields.map { |field| field.subject }.sort
+    self.fields.map { |field| field.subject }.sort.join(", ")
   end
+
+  def is_a?(specialty)
+    boolean = false
+    self.fields.each { |field| boolean = true if field.subject == specialty }
+    return boolean
+  end
+
+  # def self.find_doctors_by_state(current_state)
+  #   Doctor.joins(:offices).where("offices.state = ?", current_state).distinct
+  # end
+  #
+  # def self.find_doctors_by_city_state(current_city, current_state)
+  #   Doctor.joins(:offices).where("offices.city = ? and offices.state = ?", current_city, current_state)
+  # end
+  #
+  # def self.find_doctors_by_state_field(current_state, current_field)
+  #   Doctor.joins(offices: :fields).where(offices: { state: current_state }, fields: { subject: current_field }).distinct
+  # end
+  #
+  # def self.find_doctors_by_city_state_field(current_city, current_state, current_field)
+  #   Doctor.joins(offices: :fields).where(offices: { city: current_city, state: current_state }, fields: { subject: current_field }).distinct
+  # end
+
 end
