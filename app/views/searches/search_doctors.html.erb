@@ -1,0 +1,25 @@
+<div class="results_container">
+  <% @offices.each do |office| %>
+    <% office.doctors.each do |doctor| %>
+      <% if doctor.is_a?(@field) || @field.blank? %>
+        <div class="doctor_container">
+          <div class="doctor_info">
+            <h4><%= doctor.full_name %></h4>
+            <h4 class="soft-text"><%= doctor.expertise %></h4>
+          </div>
+
+          <div class="office_info">
+            <h4 class="soft-text"><%= office.address %></h4>
+            <h4 class="soft-text"><%= office.city %>, <%= @state %> <%= office.zip %></h4>
+            <h4 class="soft-text"><%= office.phone %></h4>
+          </div>
+
+          <div class="distance_info">
+            <h1 class="soft-text"><%= '%.1f' % office.distance %></h4>
+            <h4 class="soft-text">Miles</h4>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

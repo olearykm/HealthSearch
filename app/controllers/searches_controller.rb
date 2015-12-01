@@ -1,39 +1,30 @@
-class SearchesController < ActionController::Base
+class SearchesController < ApplicationController
 
   def home
-    @states = {
-      CA: "California",
-      GA: "Georgia",
-      IL: "Illinois",
-      MN: "Minnesota"
-    }
+    @states = Office.all_states
   end
 
-  def state
+  def search
     @state = params[:state]
     @offices = Office.where(state: @state)
     @fields = Field.all
 
-    @states = {
-      CA: "California",
-      GA: "Georgia",
-      IL: "Illinois",
-      MN: "Minnesota"
-    }
+    @states = Office.all_states
   end
 
-  def search
+  def results
+    @state = params[:state]
+    @field = params[:field]
+    @mileage = params[:mileage]
+    @zipcode = params[:zipcode]
+
+    @offices = Office.find_offices(@zipcode, @field, @mileage)
+    render :search_doctors
+
     # @city = office_params[:city]
     # @state = office_params[:state]
     # @field = field_params
     # @zipcode = search_in_zipcode
-
-    @state = params[:state]
-    @field = params[:field]
-    @zipcode = params[:zipcode]
-
-    @offices = Office.find_doctors(@zipcode, @field)
-    render :main_search
 
     # if search_for_doctors?
     #
@@ -79,43 +70,39 @@ class SearchesController < ActionController::Base
 
   private
 
-  def office_params
-    conditions = {}
-    conditions[:state] = params[:office][:state]
-    conditions[:city] = params[:office][:city] unless params[:office][:city].blank?
-    return conditions
-  end
-
-  def field_params
-    params[:field][:subject] unless params[:field][:subject].blank?
-  end
-
-  def search_for_doctors?
-    params[:search][:type] == "Doctors"
-  end
-
-  def search_for_centers?
-    params[:search][:type] == "Healthcare Centers"
-  end
-
-  def search_by_city_state?
-    office_params[:city] && !field_params
-  end
-
-  def search_by_state_field?
-    !office_params[:city] && field_params
-  end
-
-  def search_by_state?
-    !office_params[:city] && !field_params
-  end
-
-  def search_by_city_state_field?
-    office_params[:city] && field_params
-  end
-
-  def search_in_zipcode
-    params[:search][:zipcode]
-  end
+  # def office_params
+  #   conditions = {}
+  #   conditions[:state] = params[:office][:state]
+  #   conditions[:city] = params[:office][:city] unless params[:office][:city].blank?
+  #   return conditions
+  # end
+  #
+  # def field_params
+  #   params[:field][:subject] unless params[:field][:subject].blank?
+  # end
+  #
+  # def search_for_doctors?
+  #   params[:search][:type] == "Doctors"
+  # end
+  #
+  # def search_for_centers?
+  #   params[:search][:type] == "Healthcare Centers"
+  # end
+  #
+  # def search_by_city_state?
+  #   office_params[:city] && !field_params
+  # end
+  #
+  # def search_by_state_field?
+  #   !office_params[:city] && field_params
+  # end
+  #
+  # def search_by_state?
+  #   !office_params[:city] && !field_params
+  # end
+  #
+  # def search_by_city_state_field?
+  #   office_params[:city] && field_params
+  # end
 
 end

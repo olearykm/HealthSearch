@@ -1,6 +1,6 @@
 <h2>Current State: <%= @states[@state.to_sym] %></h2>
 
-<%= form_tag "/#{@state}/results" do %>
+<%= form_tag "/#{@state}/results", method: :get do %>
   <%# select_tag("search[type]", options_for_select(["Doctors", "Healthcare Centers"])) %>
   <%# select_tag("office[city]", options_for_select([["City", ""]] + @offices.all.pluck(:city))) %>
   <%# select_tag("office[state]", options_for_select([@state])) %>
@@ -8,6 +8,7 @@
 
   <%= select_tag("type", options_for_select(["Doctors", "Healthcare Centers"])) %>
   <%= select_tag("field", options_for_select([["Field", ""]] + @fields.all.pluck(:subject))) %>
+  <%= select_tag("mileage", options_for_select([["1 mile", 1], ["2 miles", 2], ["5 miles", 5], ["10 miles", 10], ["20+ miles", 25]])) %>
   <%= text_field_tag("zipcode", nil, placeholder: "zip code", required: true) %>
 
   <%= submit_tag("Search") %>
